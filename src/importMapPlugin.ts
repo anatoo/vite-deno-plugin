@@ -1,24 +1,30 @@
-import { resolve } from 'https://deno.land/std@0.204.0/path/resolve.ts';
+import { dirname, resolve } from 'https://deno.land/std@0.204.0/path/mod.ts';
+import { Config } from './types.ts';
 
 // TODO: support scopes
-
 type ImportMap = {
   imports?: Record<string, string>;
 };
 
-export function importMapPlugin(importMap: ImportMap) {
-  const resolve = createImportMapResolver(importMap);
+type Params = {
+  importMap: ImportMap;
+  importMapFilename: string;
+}
+
+export function importMapPlugin({importMap, importMapFilename}: Params) {
+  const baseDir = dirname(resolve(importMapFilename));
+  const resolveImportMap = createImportMapResolver(importMap, baseDir);
 
   return {
     name: "vite:deno-import-map-plugin",
     resolveId(importee: string, _importer: string | undefined): string | null {
-      return resolve(importee);
+      return resolveImportMap(importee);
     }
   };
 }
 
-export function createImportMapResolver(importMap: ImportMap) {
-  const specifierMap = sortAndNormalizeSpecifierMap(importMap?.imports ?? {});
+export function createImportMapResolver(importMap: ImportMap, baseDir: string) {
+  const specifierMap = sortAndNormalizeSpecifierMap(importMap?.imports ?? {}, baseDir);
 
   const prefixMap = Object.fromEntries(
     Object.entries(specifierMap)
@@ -40,23 +46,23 @@ export function createImportMapResolver(importMap: ImportMap) {
   };
 }
 
-function normalizeSpecifier(specifier: string) {
+function normalizeSpecifier(specifier: string, baseDir: string) {
   if (specifier.startsWith('./') || specifier.startsWith('../')) {
-    const resolved = resolve(specifier);
+    const resolved = resolve(baseDir, specifier);
     return specifier.endsWith("/") ? `${resolved}/` : resolved;
   }
 
   return specifier;
 };
 
-function normalizeSpecifierKey(specifierKey: string) {
+function normalizeSpecifierKey(specifierKey: string, baseDir: string) {
   if (specifierKey === '') {
     console.warn(`Invalid empty string specifier key.`);
     return null;
   }
 
   if (specifierKey.startsWith('./') || specifierKey.startsWith('../')) {
-    const resolved = resolve(specifierKey);
+    const resolved = resolve(baseDir, specifierKey);
     return specifierKey.endsWith("/") ? `${resolved}/` : resolved;
   }
 
@@ -64,10 +70,10 @@ function normalizeSpecifierKey(specifierKey: string) {
 };
 
 
-function sortAndNormalizeSpecifierMap(imports: Record<string, string>): Record<string, string | null> {
+function sortAndNormalizeSpecifierMap(imports: Record<string, string>, baseDir: string): Record<string, string | null> {
   const normalized: Record<string, string | null> = {};
   for (const [specifierKey, value] of Object.entries(imports)) {
-    const normalizedSpecifierKey = normalizeSpecifierKey(specifierKey);
+    const normalizedSpecifierKey = normalizeSpecifierKey(specifierKey, baseDir);
     if (normalizedSpecifierKey === null) {
       continue;
     }
@@ -79,7 +85,7 @@ function sortAndNormalizeSpecifierMap(imports: Record<string, string>): Record<s
       continue;
     }
 
-    const normalizedSpecifier = normalizeSpecifier(value);
+    const normalizedSpecifier = normalizeSpecifier(value, baseDir);
 
     if (specifierKey.endsWith('/') && !normalizedSpecifierKey.endsWith('/')) {
       console.warn(`Invalid address "${normalizedSpecifier}" for package specifier key "${specifierKey}". ` +

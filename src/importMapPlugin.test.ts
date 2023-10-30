@@ -3,16 +3,24 @@ import { dirname } from 'https://deno.land/std@v0.204.0/path/mod.ts';
 import { importMapPlugin } from './importMapPlugin.ts';
 
 Deno.test("importMaps() when importMap is empty", () => {
-  const plugin = importMapPlugin({});
+  const plugin = importMapPlugin({
+    importMap: {
+      imports: {}
+    },
+    importMapFilename: "importMap.json"
+  });
   assertEquals(plugin.resolveId('./foo.ts', undefined), null);
 });
 
 Deno.test("importMaps() when importMap has imports", () => {
   const plugin = importMapPlugin({
-    imports: {
-      "react": "https://cdn.skypack.dev/react",
-      "react/": "https://cdn.skypack.dev/react/",
-    }
+    importMap: {
+      imports: {
+        "react": "https://cdn.skypack.dev/react",
+          "react/": "https://cdn.skypack.dev/react/",
+      }
+    },
+    importMapFilename: "importMap.json"
   });
 
   assertEquals(plugin.resolveId('react', undefined), 'https://cdn.skypack.dev/react');
@@ -23,9 +31,12 @@ Deno.test("importMaps() when importMap has relative alias", () => {
   const dirName = dirname(dirname(import.meta.url.substring(7)));
 
   const plugin = importMapPlugin({
-    imports: {
-      "@/": "./",
-    }
+    importMap: {
+      imports: {
+        "@/": "./",
+      }
+    },
+    importMapFilename: "importMap.json"
   });
 
   assertEquals(plugin.resolveId('@/foo.ts', undefined), `${dirName}/foo.ts`);
