@@ -1,9 +1,7 @@
 import { urlImportPlugin, UrlImportLoader } from './urlImportPlugin.ts';
-import { assertSpyCall } from "https://deno.land/x/mock@0.15.2/mod.ts";
-import { assertEquals } from "https://deno.land/std@v0.204.0/testing/asserts.ts";
-import { stub } from "https://deno.land/x/mock@0.15.2/mock.ts";
+import { assertEquals, assertSpyCall, stub } from "./deps.ts";
 
-Deno.test('urlImportPlugin() ', async () => {
+Deno.test('urlImportPlugin()', async (t) => {
   const loader = new UrlImportLoader();
   const plugin = urlImportPlugin({ loader });
   const cache = stub(loader, 'cache');
@@ -15,5 +13,15 @@ Deno.test('urlImportPlugin() ', async () => {
     args: ['https://esm.sh/react?dev=']
   });
 
-  assertEquals(await plugin.resolveId('./foobar.ts', undefined), null);
+  const testcases: [string, string | undefined, string | null][] = [
+    ['./foobar.ts', undefined, null],
+    ['/foobar.ts', 'https://example.com/src/index.ts', 'https://example.com/foobar.ts'],
+    ['https://example.com/foobar.ts', undefined, 'https://example.com/foobar.ts'],
+  ];
+
+  for (const [importee, importer, expected] of testcases) {
+    await t.step(`resolveId(${importee}, ${importer})`, async () => {
+      assertEquals(await plugin.resolveId(importee, importer), expected);
+    });
+  }
 });

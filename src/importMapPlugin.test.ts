@@ -1,5 +1,5 @@
-import { assertEquals } from "https://deno.land/std@v0.204.0/testing/asserts.ts";
-import { dirname } from 'https://deno.land/std@v0.204.0/path/mod.ts';
+import { assertEquals } from "./deps.ts";
+import { dirname } from './deps.ts';
 import { importMapPlugin } from './importMapPlugin.ts';
 
 Deno.test("importMaps() when importMap is empty", () => {
