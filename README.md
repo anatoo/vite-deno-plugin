@@ -6,6 +6,11 @@ A [Vite](https://vitejs.dev) plugin that can resolve Deno modules.
  - URL import just works.
  - Import map support.
 
+## TODO
+
+ - publish library
+ - add various packages to test in examples
+
 ## Getting Started
 
 Configure a plugin in `vite.config.mts`(NOT `vite.config.ts`).

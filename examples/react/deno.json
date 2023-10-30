@@ -1,10 +1,16 @@
 {
   "tasks": {
-    "dev": "deno run -A npm:vite@3.2.4 . --config ./vite.config.mts"
+    "dev": "deno run -A npm:vite@3.2.4 . --config ./vite.config.mts",
+    "build": "deno run -A npm:vite@3.2.4 build . --config ./vite.config.mts",
+    "preview": "deno run -A npm:vite@3.2.4 preview . --config ./vite.config.mts",
+    "optimize": "deno run -A npm:vite@3.2.4 optimize . --config ./vite.config.mts"
   },
   "imports": {
     "react": "https://esm.sh/react@18.2.0",
-    "react/": "https://esm.sh/react@18.2.0/"
+    "react/": "https://esm.sh/react@18.2.0/",
+    "react-dom": "https://esm.sh/react-dom@18.2.0",
+    "react-dom/": "https://esm.sh/react-dom@18.2.0/",
+    "wouter": "https://esm.sh/wouter@2.12.0"
   },
   "compilerOptions": {
     "jsx": "react-jsx",

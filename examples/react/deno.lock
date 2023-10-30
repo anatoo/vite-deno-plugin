@@ -704,7 +704,10 @@
     }
   },
   "redirects": {
-    "https://esm.sh/v128/@types/react@~18.2/jsx-runtime~.d.ts": "https://esm.sh/v128/@types/react@18.2.25/jsx-runtime~.d.ts"
+    "https://esm.sh/v128/@types/react@~18.2/jsx-runtime~.d.ts": "https://esm.sh/v128/@types/react@18.2.25/jsx-runtime~.d.ts",
+    "https://esm.sh/v133/@types/react-dom@~18.2/client~.d.ts": "https://esm.sh/v133/@types/react-dom@18.2.14/client~.d.ts",
+    "https://esm.sh/v133/@types/react-dom@~18.2/index.d.ts": "https://esm.sh/v133/@types/react-dom@18.2.14/index.d.ts",
+    "https://esm.sh/wouter": "https://esm.sh/wouter@2.12.1"
   },
   "remote": {
     "https://deno.land/std@0.204.0/assert/assert.ts": "9a97dad6d98c238938e7540736b826440ad8c1c1e54430ca4c4e623e585607ee",
@@ -778,8 +781,44 @@
     "https://deno.land/std@0.204.0/path/windows/separator.ts": "ae21f27015f10510ed1ac4a0ba9c4c9c967cbdd9d9e776a3e4967553c397bd5d",
     "https://deno.land/std@0.204.0/path/windows/to_file_url.ts": "8e9ea9e1ff364aa06fa72999204229952d0a279dbb876b7b838b2b2fea55cce3",
     "https://deno.land/std@0.204.0/path/windows/to_namespaced_path.ts": "e0f4d4a5e77f28a5708c1a33ff24360f35637ba6d8f103d19661255ef7bfd50d",
+    "https://esm.sh/react-dom@18.2.0/client": "696808a26f2c8d9dc6dcfba957a88768b74bdbe4447c4eb39f2863a5055de1d4",
+    "https://esm.sh/react-dom@18.2.0/client?dev": "db94655481962a38b32ffbbb0ad50df0a5582ee3e139acb375f989f74b630d82",
+    "https://esm.sh/react-dom@18.2.0/client?dev=": "db94655481962a38b32ffbbb0ad50df0a5582ee3e139acb375f989f74b630d82",
+    "https://esm.sh/react-dom@18.2.0?dev/client": "20d71192d5e994628668e92fd99a054802f0def1afbca0080cf15ca2f2c183da",
     "https://esm.sh/react@18.2.0/jsx-runtime": "914a55a07c388d345c5a0c11616ee5282242e8b8dfd0d505b83500ea04fd9870",
+    "https://esm.sh/react@18.2.0/jsx-runtime?dev": "4ada81ef25558cd445b76f531a29b9af08b2ddc46ce7e417954cfeb04f760a3c",
+    "https://esm.sh/react@18.2.0/jsx-runtime?dev=": "4ada81ef25558cd445b76f531a29b9af08b2ddc46ce7e417954cfeb04f760a3c",
+    "https://esm.sh/react@18.2.0?dev/jsx-runtime": "4ada81ef25558cd445b76f531a29b9af08b2ddc46ce7e417954cfeb04f760a3c",
+    "https://esm.sh/stable/react@18.2.0/denonext/jsx-runtime.development.js": "d75e94ada836c492dc9a0c00fe2b050582054dd1cbbb1f7ab8f475a729e2423b",
     "https://esm.sh/stable/react@18.2.0/denonext/jsx-runtime.js": "54d8a51c6ca025380abd2d5302e4a9b38ff835d9759c4657e52314f587eaf6bf",
-    "https://esm.sh/stable/react@18.2.0/denonext/react.mjs": "3c4f23bcfc53b256fcfaf6f834fa9f584c3bb7be667b2682c6cb6ba8ef88f8e6"
+    "https://esm.sh/stable/react@18.2.0/denonext/react.development.mjs": "88729b33eccbea2c09894f07459f32911777721a3b50fd32151182e82c4351e2",
+    "https://esm.sh/stable/react@18.2.0/denonext/react.development.mjs?dev=": "88729b33eccbea2c09894f07459f32911777721a3b50fd32151182e82c4351e2",
+    "https://esm.sh/stable/react@18.2.0/denonext/react.mjs": "3c4f23bcfc53b256fcfaf6f834fa9f584c3bb7be667b2682c6cb6ba8ef88f8e6",
+    "https://esm.sh/v133/react-dom@18.2.0/denonext/client.development.js": "372d345cb97c5ec7b9cd9042d49bdea157c2a231db8078c4857ca9354e1a8da0",
+    "https://esm.sh/v133/react-dom@18.2.0/denonext/client.development.js?dev": "372d345cb97c5ec7b9cd9042d49bdea157c2a231db8078c4857ca9354e1a8da0",
+    "https://esm.sh/v133/react-dom@18.2.0/denonext/client.development.js?dev=": "372d345cb97c5ec7b9cd9042d49bdea157c2a231db8078c4857ca9354e1a8da0",
+    "https://esm.sh/v133/react-dom@18.2.0/denonext/client.js": "0a4f11c208d3b1a933cc83ca26a30d1c68f5ed186c93b3d66e787170bec93dc7",
+    "https://esm.sh/v133/react-dom@18.2.0/denonext/react-dom.development.mjs": "a16c087a0cdb5b98c3eaf44c5d24a680e21fc69a8b144859e14ebdd1849755d7",
+    "https://esm.sh/v133/react-dom@18.2.0/denonext/react-dom.development.mjs?dev": "a16c087a0cdb5b98c3eaf44c5d24a680e21fc69a8b144859e14ebdd1849755d7",
+    "https://esm.sh/v133/react-dom@18.2.0/denonext/react-dom.development.mjs?dev=": "a16c087a0cdb5b98c3eaf44c5d24a680e21fc69a8b144859e14ebdd1849755d7",
+    "https://esm.sh/v133/react-dom@18.2.0/denonext/react-dom.mjs": "9b7c11e03f42d4ff2ca37acc64e486a8b70593ecfd80350d51d77382737d3c1a",
+    "https://esm.sh/v133/scheduler@0.23.0/denonext/scheduler.development.mjs": "b6c8f513ecc4afb69b0c5c78a7674bb1c78f7e003946c6c8c655778d81d775db",
+    "https://esm.sh/v133/scheduler@0.23.0/denonext/scheduler.development.mjs?dev": "b6c8f513ecc4afb69b0c5c78a7674bb1c78f7e003946c6c8c655778d81d775db",
+    "https://esm.sh/v133/scheduler@0.23.0/denonext/scheduler.development.mjs?dev=": "b6c8f513ecc4afb69b0c5c78a7674bb1c78f7e003946c6c8c655778d81d775db",
+    "https://esm.sh/v133/scheduler@0.23.0/denonext/scheduler.mjs": "cdbc6d2823e2c6fffcb14501146ff2602a38c48d3c9dd9268f308e833ede2b49",
+    "https://esm.sh/v133/use-sync-external-store@1.2.0/denonext/shim.development.js": "6d809e52639ca720eee46a6c63ba55c597eb72d7eae1edd95cf3643538e46158",
+    "https://esm.sh/v133/use-sync-external-store@1.2.0/denonext/shim.development.js?dev=": "6d809e52639ca720eee46a6c63ba55c597eb72d7eae1edd95cf3643538e46158",
+    "https://esm.sh/v133/use-sync-external-store@1.2.0/denonext/shim.js": "ee51a93766077d32104ee8090cafb05c1bd2e23e256f3516368f8e9a8516f177",
+    "https://esm.sh/v133/wouter@2.11.0/denonext/wouter.development.mjs": "e1e2cbe6121ccbcb7886ff4df97c8497e3bd4fe64125c1c85101a5591c19fec8",
+    "https://esm.sh/v133/wouter@2.11.0/denonext/wouter.development.mjs?dev=": "e1e2cbe6121ccbcb7886ff4df97c8497e3bd4fe64125c1c85101a5591c19fec8",
+    "https://esm.sh/v133/wouter@2.12.0/denonext/wouter.development.mjs": "4edf9e90c634a65ff305b2318c6846a62b71a4fa8f6025385420a73a9d2c26da",
+    "https://esm.sh/v133/wouter@2.12.0/denonext/wouter.development.mjs?dev=": "4edf9e90c634a65ff305b2318c6846a62b71a4fa8f6025385420a73a9d2c26da",
+    "https://esm.sh/v133/wouter@2.12.0/denonext/wouter.mjs": "8c898365a3639c60722c59bea4c7d9683b8df824ded89eb8bee2b2a0601d5dc8",
+    "https://esm.sh/v133/wouter@2.12.1/denonext/wouter.mjs": "22ba5ba0835066df674e73b780abd580d980c31e6368306b7bf12be9354d0de2",
+    "https://esm.sh/wouter@2.11.0?dev=": "f137dac78c40c4986eff6ac7443117e102e293b653d9790539bae6a2e83335eb",
+    "https://esm.sh/wouter@2.12.0": "6732a6335cc127ff7c1c47d94edd9c3b1a5ae8abd407d9e5a589a54bde28b8ca",
+    "https://esm.sh/wouter@2.12.0?dev": "7e0e75ea40f3038d2a6cba52837893ed77ef9df878b2de937655e774bb8a9836",
+    "https://esm.sh/wouter@2.12.0?dev=": "7e0e75ea40f3038d2a6cba52837893ed77ef9df878b2de937655e774bb8a9836",
+    "https://esm.sh/wouter@2.12.1": "ab90f4a83e9856f9ccc2143534241f18b21333a4b8e12aeb32065e00be5d41d6"
   }
 }
