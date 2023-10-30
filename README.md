@@ -16,7 +16,7 @@ Configure a plugin in `vite.config.mts`(NOT `vite.config.ts`).
 
 ```typescript
 import { defineConfig } from 'npm:vite@4.5.0';
-import viteDeno from 'https://deno.land/x/vite_deno_plugin@v0.9.1/mod.ts';
+import viteDeno from 'https://deno.land/x/vite_deno_plugin/mod.ts';
 
 export default defineConfig({
   plugins: [viteDeno({})],
