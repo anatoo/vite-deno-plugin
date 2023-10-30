@@ -1,0 +1,21 @@
+name: ci
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: denoland/setup-deno@main
+        with:
+          deno-version: "1.37.1"
+      - name: Run lint
+        run: |
+          deno task lint
+      - name: Check
+        run: |
+          deno task check
+      - name: Run tests
+        run: |
+          deno task test

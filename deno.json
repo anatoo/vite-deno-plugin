@@ -1,6 +1,8 @@
 {
   "tasks": {
     "test": "deno test --allow-read --allow-write --allow-net --allow-env --allow-run --unstable",
-    "check": "deno check mod.ts"
+    "check": "deno check mod.ts",
+    "format": "deno fmt --ignore=dist,examples",
+    "lint": "deno lint"
   }
 }
