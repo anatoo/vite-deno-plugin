@@ -27,7 +27,7 @@ export default defineConfig({
 $ deno run -A npm:vite@4.5.0 . --config ./vite.config.mts
 ```
 
-For more details, check out [React example](./examples/react) directory.
+For more details, check out [React example](https://github.com/anatoo/vite-deno-plugin/tree/main/examples/react) directory.
 
 ## Config
 
@@ -47,4 +47,4 @@ viteDeno({
 
 ## Examples
 
- - [React](./examples/react)
+ - [React](https://github.com/anatoo/vite-deno-plugin/tree/main/examples/react)
