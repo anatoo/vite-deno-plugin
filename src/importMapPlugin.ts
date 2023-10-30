@@ -1,38 +1,113 @@
 import { resolve } from 'https://deno.land/std@0.204.0/path/resolve.ts';
 
+// TODO: support scopes
+
 type ImportMap = {
   imports?: Record<string, string>;
 };
 
 export function importMapPlugin(importMap: ImportMap) {
+  const resolve = createImportMapResolver(importMap);
+
   return {
     name: "vite:deno-import-map-plugin",
-    config() {
-      const alias = Object.fromEntries(
-        Object.entries(importMap?.imports ?? {})
-          .map(([key, value]) => [key, resolvePath(value)])
-      );
-
-      return {
-        resolve: { alias },
-      };
-    },
+    resolveId(importee: string, _importer: string | undefined): string | null {
+      return resolve(importee);
+    }
   };
 }
 
-function resolvePath(path: string) {
-  if (isLocalImport(path)) {
-    const res = resolve(path);
-    if (path.endsWith("/")) {
-      return `${res}/`;
-    } else {
-      return res;
+export function createImportMapResolver(importMap: ImportMap) {
+  const specifierMap = sortAndNormalizeSpecifierMap(importMap?.imports ?? {});
+
+  const prefixMap = Object.fromEntries(
+    Object.entries(specifierMap)
+      .filter(([key, _]) => key.endsWith('/'))
+  );
+
+  return function resolve(importee: string): string | null {
+    if (Object.hasOwn(specifierMap, importee) && typeof specifierMap[importee] === 'string') {
+      return specifierMap[importee];
     }
-  } else {
-    return path;
-  }
+
+    for (const [key, value] of Object.entries(prefixMap)) {
+      if (importee.startsWith(key) && typeof value === 'string') {
+        return value + importee.slice(key.length);
+      }
+    }
+
+    return null;
+  };
 }
 
-function isLocalImport(path: string) {
-  return ["./", "../"].some((it) => path.startsWith(it));
+function normalizeSpecifier(specifier: string) {
+  if (specifier.startsWith('./') || specifier.startsWith('../')) {
+    const resolved = resolve(specifier);
+    return specifier.endsWith("/") ? `${resolved}/` : resolved;
+  }
+
+  return specifier;
+};
+
+function normalizeSpecifierKey(specifierKey: string) {
+  if (specifierKey === '') {
+    console.warn(`Invalid empty string specifier key.`);
+    return null;
+  }
+
+  if (specifierKey.startsWith('./') || specifierKey.startsWith('../')) {
+    const resolved = resolve(specifierKey);
+    return specifierKey.endsWith("/") ? `${resolved}/` : resolved;
+  }
+
+  return specifierKey;
+};
+
+
+function sortAndNormalizeSpecifierMap(imports: Record<string, string>): Record<string, string | null> {
+  const normalized: Record<string, string | null> = {};
+  for (const [specifierKey, value] of Object.entries(imports)) {
+    const normalizedSpecifierKey = normalizeSpecifierKey(specifierKey);
+    if (normalizedSpecifierKey === null) {
+      continue;
+    }
+
+    if (typeof value !== 'string') {
+      console.warn(`Invalid address ${JSON.stringify(value)} for the specifier key "${specifierKey}". ` +
+        `Addresses must be strings.`);
+      normalized[normalizedSpecifierKey] = null;
+      continue;
+    }
+
+    const normalizedSpecifier = normalizeSpecifier(value);
+
+    if (specifierKey.endsWith('/') && !normalizedSpecifierKey.endsWith('/')) {
+      console.warn(`Invalid address "${normalizedSpecifier}" for package specifier key "${specifierKey}". ` +
+        `Package addresses must end with "/".`);
+      normalized[normalizedSpecifierKey] = null;
+      continue;
+    }
+
+    normalized[normalizedSpecifierKey] = normalizedSpecifier;
+  }
+
+  const sortedAndNormalized: Record<string, string | null> = {};
+  const sortedKeys = Object.keys(normalized).sort((a, b) => codeUnitCompare(b, a));
+  for (const key of sortedKeys) {
+    sortedAndNormalized[key] = normalized[key];
+  }
+
+  return sortedAndNormalized;
+}
+
+function codeUnitCompare(a: string, b: string) {
+  if (a > b) {
+    return 1;
+  }
+
+  if (b > a) {
+    return -1;
+  }
+
+  throw new Error('This should never be reached because this is only used on JSON object keys');
 }

@@ -1,22 +1,21 @@
 import { debug } from './utils.ts';
-import type { ResolvedConfig, Plugin } from 'npm:vite@4.5.0';
+import type { ResolvedConfig } from 'npm:vite@4.5.0';
 
-export function urlImportPlugin(): Plugin {
-  const loader = new UrlImportLoader();
-  let config: ResolvedConfig;
+export function urlImportPlugin({loader = new UrlImportLoader()}: {loader?: ImportLoader} = {}) {
+  let mode = 'development';
 
   return {
     name: 'vite:deno-url-import',
     enforce: 'pre',
 
     configResolved(resolvedConfig: ResolvedConfig) {
-      config = resolvedConfig;
+      mode = resolvedConfig.mode;
     },
 
     async resolveId(importee: string, importer: string | undefined) {
       if (importer?.startsWith('https://') && importee.startsWith('/')) {
         const url = new URL(importee, importer);
-        if (url.hostname === 'esm.sh' && config.mode === 'development') {
+        if (url.hostname === 'esm.sh' && mode === 'development') {
           url.searchParams.set('dev', '');
         }
         debug('resolve success:', importee, '===>', url.toString());
@@ -26,7 +25,7 @@ export function urlImportPlugin(): Plugin {
       
       if (importee.startsWith('https://')) {
         const url = new URL(importee);
-        if (url.hostname === 'esm.sh' && config.mode === 'development') {
+        if (url.hostname === 'esm.sh' && mode === 'development') {
           url.searchParams.set('dev', '');
         }
         await loader.cache(url.toString());
@@ -52,7 +51,12 @@ export function urlImportPlugin(): Plugin {
   };
 }
 
-class UrlImportLoader {
+interface ImportLoader {
+  cache(url: string): Promise<void>;
+  load(url: string): Promise<string | null>;
+}
+
+export class UrlImportLoader implements ImportLoader {
   cacheMap = new Map<string, boolean>();
   loadCacheMap = new Map<string, string | null>();
 
