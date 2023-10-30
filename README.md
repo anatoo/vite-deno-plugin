@@ -16,7 +16,7 @@ A [Vite](https://vitejs.dev) plugin that can resolve Deno modules.
 Configure a plugin in `vite.config.mts`(NOT `vite.config.ts`).
 
 ```typescript
-import { defineConfig } from 'npm:vite@3.2.4';
+import { defineConfig } from 'npm:vite@4.5.0';
 import viteDeno from 'mod.ts';
 
 export default defineConfig({
@@ -25,7 +25,7 @@ export default defineConfig({
 ```
 
 ```bash
-$ deno run -A npm:vite@3.2.4 . --config ./vite.config.mts
+$ deno run -A npm:vite@4.5.0 . --config ./vite.config.mts
 ```
 
 For more details, check out [React example](`./examples/react`) directory.
@@ -44,7 +44,7 @@ viteDeno({
 
 ## Known Issues
 
- - Currently `npm:*` specifier is not supported. So you have to use `https://esm.sh/` to load npm modules.
+ - Currently `npm:*` specifier is not supported. So you have to load npm modules via `https://esm.sh/` instead.
 
 ## Examples
 

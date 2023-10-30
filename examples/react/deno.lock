@@ -3,7 +3,8 @@
   "packages": {
     "specifiers": {
       "npm:@vitejs/plugin-react": "npm:@vitejs/plugin-react@4.1.0_vite@4.5.0_@babel+core@7.23.2",
-      "npm:vite@3.2.4": "npm:vite@3.2.4"
+      "npm:vite@3.2.4": "npm:vite@3.2.4",
+      "npm:vite@4.5.0": "npm:vite@4.5.0"
     },
     "npm": {
       "@ampproject/remapping@2.2.1": {
@@ -704,6 +705,7 @@
     }
   },
   "redirects": {
+    "https://esm.sh/v128/@types/react@~18.2/jsx-dev-runtime~.d.ts": "https://esm.sh/v128/@types/react@18.2.25/jsx-dev-runtime~.d.ts",
     "https://esm.sh/v128/@types/react@~18.2/jsx-runtime~.d.ts": "https://esm.sh/v128/@types/react@18.2.25/jsx-runtime~.d.ts",
     "https://esm.sh/v133/@types/react-dom@~18.2/client~.d.ts": "https://esm.sh/v133/@types/react-dom@18.2.14/client~.d.ts",
     "https://esm.sh/v133/@types/react-dom@~18.2/index.d.ts": "https://esm.sh/v133/@types/react-dom@18.2.14/index.d.ts",
@@ -785,10 +787,12 @@
     "https://esm.sh/react-dom@18.2.0/client?dev": "db94655481962a38b32ffbbb0ad50df0a5582ee3e139acb375f989f74b630d82",
     "https://esm.sh/react-dom@18.2.0/client?dev=": "db94655481962a38b32ffbbb0ad50df0a5582ee3e139acb375f989f74b630d82",
     "https://esm.sh/react-dom@18.2.0?dev/client": "20d71192d5e994628668e92fd99a054802f0def1afbca0080cf15ca2f2c183da",
+    "https://esm.sh/react@18.2.0/jsx-dev-runtime?dev=": "bbba7059cea5ab290b0878f767f42599637c97431d3234b89b08bfaed22a371b",
     "https://esm.sh/react@18.2.0/jsx-runtime": "914a55a07c388d345c5a0c11616ee5282242e8b8dfd0d505b83500ea04fd9870",
     "https://esm.sh/react@18.2.0/jsx-runtime?dev": "4ada81ef25558cd445b76f531a29b9af08b2ddc46ce7e417954cfeb04f760a3c",
     "https://esm.sh/react@18.2.0/jsx-runtime?dev=": "4ada81ef25558cd445b76f531a29b9af08b2ddc46ce7e417954cfeb04f760a3c",
     "https://esm.sh/react@18.2.0?dev/jsx-runtime": "4ada81ef25558cd445b76f531a29b9af08b2ddc46ce7e417954cfeb04f760a3c",
+    "https://esm.sh/stable/react@18.2.0/denonext/jsx-dev-runtime.development.js": "24a5496e62e654f88d17e7d70c43f65086d228410bd3b94874f49d6cf6e595e6",
     "https://esm.sh/stable/react@18.2.0/denonext/jsx-runtime.development.js": "d75e94ada836c492dc9a0c00fe2b050582054dd1cbbb1f7ab8f475a729e2423b",
     "https://esm.sh/stable/react@18.2.0/denonext/jsx-runtime.js": "54d8a51c6ca025380abd2d5302e4a9b38ff835d9759c4657e52314f587eaf6bf",
     "https://esm.sh/stable/react@18.2.0/denonext/react.development.mjs": "88729b33eccbea2c09894f07459f32911777721a3b50fd32151182e82c4351e2",
