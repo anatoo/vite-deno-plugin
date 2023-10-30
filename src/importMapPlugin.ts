@@ -1,5 +1,4 @@
 import { dirname, resolve } from 'https://deno.land/std@0.204.0/path/mod.ts';
-import { Config } from './types.ts';
 
 // TODO: support scopes
 type ImportMap = {
