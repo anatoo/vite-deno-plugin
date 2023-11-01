@@ -1,5 +1,7 @@
 # vite-deno-plugin
 
+[![deno module](https://shield.deno.dev/x/vite_deno_plugin)](https://deno.land/x/vite_deno_plugin)
+
 A [Vite](https://vitejs.dev) plugin that can resolve Deno modules.
 
  - Run Vite without `node_modules` directory.
