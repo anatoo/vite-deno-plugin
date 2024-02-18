@@ -1,15 +1,15 @@
 import { assertEquals } from "./deps.ts";
-import { dirname } from './deps.ts';
-import { importMapPlugin } from './importMapPlugin.ts';
+import { dirname } from "./deps.ts";
+import { importMapPlugin } from "./importMapPlugin.ts";
 
 Deno.test("importMaps() when importMap is empty", () => {
   const plugin = importMapPlugin({
     importMap: {
-      imports: {}
+      imports: {},
     },
-    importMapFilename: "importMap.json"
+    importMapFilename: "importMap.json",
   });
-  assertEquals(plugin.resolveId('./foo.ts', undefined), null);
+  assertEquals(plugin.resolveId("./foo.ts", undefined), null);
 });
 
 Deno.test("importMaps() when importMap has imports", () => {
@@ -17,14 +17,20 @@ Deno.test("importMaps() when importMap has imports", () => {
     importMap: {
       imports: {
         "react": "https://cdn.skypack.dev/react",
-          "react/": "https://cdn.skypack.dev/react/",
-      }
+        "react/": "https://cdn.skypack.dev/react/",
+      },
     },
-    importMapFilename: "importMap.json"
+    importMapFilename: "importMap.json",
   });
 
-  assertEquals(plugin.resolveId('react', undefined), 'https://cdn.skypack.dev/react');
-  assertEquals(plugin.resolveId('react/client', undefined), 'https://cdn.skypack.dev/react/client');
+  assertEquals(
+    plugin.resolveId("react", undefined),
+    "https://cdn.skypack.dev/react",
+  );
+  assertEquals(
+    plugin.resolveId("react/client", undefined),
+    "https://cdn.skypack.dev/react/client",
+  );
 });
 
 Deno.test("importMaps() when importMap has relative alias", () => {
@@ -34,10 +40,10 @@ Deno.test("importMaps() when importMap has relative alias", () => {
     importMap: {
       imports: {
         "@/": "./",
-      }
+      },
     },
-    importMapFilename: "importMap.json"
+    importMapFilename: "importMap.json",
   });
 
-  assertEquals(plugin.resolveId('@/foo.ts', undefined), `${dirName}/foo.ts`);
+  assertEquals(plugin.resolveId("@/foo.ts", undefined), `${dirName}/foo.ts`);
 });

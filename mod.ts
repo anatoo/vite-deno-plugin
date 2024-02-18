@@ -1,25 +1,24 @@
-import { importMapPlugin } from './src/importMapPlugin.ts';
-import { urlImportPlugin } from './src/urlImportPlugin.ts';
-import { Config } from './src/types.ts';
-import { parseImportMapFile } from './src/utils.ts';
-
-const defaultConfig = {
-  importMapFilename: "./deno.json",
-} as const;
+import { importMapPlugin } from "./src/importMapPlugin.ts";
+import { urlImportPlugin } from "./src/urlImportPlugin.ts";
+import { Config } from "./src/types.ts";
+import { getDefaults, parseImportMapFile } from "./src/utils.ts";
 
 function viteDenoPlugin(config: Config = {}) {
-  const { importMapFilename } = { ...defaultConfig, ...config };
+  const resolvedConfig = typeof config.importMapFilename === "string"
+    ? config
+    : { ...getDefaults(), ...config };
+  const { importMapFilename } = resolvedConfig;
+
   const importMap = parseImportMapFile(importMapFilename);
 
   return [
-    importMapPlugin({
-      importMap,
-      importMapFilename,
-    }),
-    urlImportPlugin()
+    ...(
+      typeof importMapFilename === "string"
+        ? [importMapPlugin({ importMap, importMapFilename })]
+        : []
+    ),
+    urlImportPlugin(),
   ];
 }
 
 export default viteDenoPlugin;
-
-

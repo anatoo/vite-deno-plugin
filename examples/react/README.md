@@ -1,6 +1,6 @@
 # React example 
 
-This example shows how to run [Vite](https://vitejs.dev) and React with deno-vite-plugin.
+This example shows how to run [Vite](https://vitejs.dev) and React with vite-deno-plugin.
 
 To start this example, run:
 
