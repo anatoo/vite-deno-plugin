@@ -1,5 +1,5 @@
 import { debug } from "./utils.ts";
-import type { ResolvedConfig } from "npm:vite@4.5.0";
+import type { ResolvedConfig } from "npm:vite@5.2.6";
 
 export function urlImportPlugin(
   { loader = new UrlImportLoader() }: { loader?: ImportLoader } = {},
