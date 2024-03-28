@@ -21,7 +21,7 @@ in Deno can be used inside Vite.
 Configure a plugin in `vite.config.mts`(NOT `vite.config.ts`).
 
 ```typescript
-import { defineConfig } from "npm:vite@4.5.0";
+import { defineConfig } from "npm:vite@5.2.6";
 import viteDeno from "https://deno.land/x/vite_deno_plugin/mod.ts";
 
 export default defineConfig({
@@ -30,7 +30,7 @@ export default defineConfig({
 ```
 
 ```bash
-$ deno run -A npm:vite@4.5.0 . --config ./vite.config.mts
+$ deno run -A npm:vite@5.2.6 . --config ./vite.config.mts
 ```
 
 For more details, check out

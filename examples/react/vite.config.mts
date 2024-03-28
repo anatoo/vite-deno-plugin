@@ -1,4 +1,4 @@
-import { defineConfig } from 'npm:vite@3.2.4';
+import { defineConfig } from 'npm:vite@5.2.6';
 import react from 'npm:@vitejs/plugin-react';
 import viteDeno from '../../mod.ts';
 import { dirname } from 'https://deno.land/std/path/mod.ts';
