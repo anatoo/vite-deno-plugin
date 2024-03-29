@@ -51,8 +51,9 @@ viteDeno({
 
 ## Known Issues
 
-- Currently `npm:*` specifier is not supported. So you have to load npm modules
+- `npm:*` specifier is not supported. So you have to load npm modules
   via `https://esm.sh/` instead.
+- Loading remote Deno modules does not work. For example, libraries hosted in [deno.land](https://deno.land) cannot be loaded with this plugin.
 
 ## Examples
 
